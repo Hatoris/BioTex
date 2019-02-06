@@ -1,0 +1,15 @@
+\subsection{Cellules utilisées}
+
+Listes des cellules utilisées pendant l'expérience : 
+
+\begin{table}[h]
+\caption{Informations sur les cellules utilisées}
+\begin{pycode}
+
+from tabulate import tabulate
+
+table = r"\resizebox{\textwidth}{!}{" + tabulate(cells_infos, headers="firstrow", tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}

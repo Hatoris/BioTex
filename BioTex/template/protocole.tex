@@ -1,0 +1,118 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french, english]{babel} 
+\usepackage[pdftex]{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{appendix}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cite}
+\usepackage{doi}
+\usepackage{setspace}
+\usepackage{etoolbox} 
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage[flushleft]{threeparttable}
+\usepackage[french]{nomencl}
+\usepackage{pythontex}
+\usepackage{"C:/Users/Florian/OneDrive\space - \space Universite \space de \space Montreal/LaTeX/BioTex/BioTex/package/BioAbreviation"}
+
+\newcommand{\PATH}[2]{"C:/Users/Florian/OneDrive - Universite de Montreal/LaTeX/BioTex/BioTex/#1/#2"}
+
+
+\makenomenclature
+\renewcommand{\nomname}{Liste des abréviations et des symboles}
+
+\begin{document}
+\title{}
+\author{Florian Bernard}
+\date{Le \selectlanguage{french}\today} 
+\maketitle
+
+\section{Introduction}
+
+\section{Matériels}
+
+\begin{pycode}
+cells_infos = [
+    ["Nom des cellules", "Passages", "Date d'isolation"],
+    ["BMEC", "1", "2018-11-12"],
+    ["bEnd3", "9", "-"],
+    ["BMEC", "1", "2019-02-08"],
+
+]
+\end{pycode}
+
+\input{\PATH{material}{Cellules}}
+
+\begin{pycode}
+conso_infos = [
+    ["Nom", "Concentration", "N° de catalogue", "N° de lot", "Compagnie"],
+    ["DMEM", "-", "319-051-CL", "-", "Wisent"],
+    ["PBS", "-", "311-010-CL", "-", "Wisent"],
+]
+\end{pycode}
+
+\input{\PATH{material}{Consommables}}
+
+\section{Protocoles}
+
+\begin{pycode}
+
+nb_puits = 48 # nombre de puits à revêtir
+vol_par_puit = 0.1 # 0.1 mL 100 uL 
+Q_coll_par_puit = round(0.33 * 5, 2) # ug 5 ug/cm2 * 0.33 cm2
+
+Ci = 1 #ug/uL
+Cf = round(Q_coll_par_puit/(vol_par_puit * 1000), 4) # ug/uL
+Vf = round(nb_puits * vol_par_puit * 1000 * 1.1, 2) # uL avec 10% pour les pertes
+Vi = round(Cf * Vf / Ci, 2) # uL
+
+start_incubation = "11h00"
+end_incubation = "13h00"
+TOTAL_incubation = ""
+
+\end{pycode}
+
+\input{\PATH{protocole}{Transwell_collagen.tex}}
+
+%\input{\PATH{protocole}{Comptage_cellules.tex}}
+
+%\input{\PATH{protocole}{Transwell_depos_cellule.tex}}
+
+%\input{\PATH{protocole}{Mesure_TEER.tex}}
+
+%\input{\PATH{protocole}{Milieu_inflamation.tex}}
+
+%\input{\PATH{protocole}{Inflammation_cellule.tex}}
+
+%\input{\PATH{protocole}{Solution_stock_poudre.tex}}
+
+%\input{\PATH{protocole}{Dilution_courbe_calibration.tex}}
+
+%\input{\PATH{protocole}{Test_permeabilite.tex}}
+
+\section{Résultats}
+
+\section{Discussions}
+
+\subsection{Commentaires durant l'expérience}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%ANNEXES%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Annexes}
+
+
+\printnomenclature
+
+
+\end{document}

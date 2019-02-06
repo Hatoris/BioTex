@@ -1,0 +1,16 @@
+\subsection{Liste des consommables}
+
+Listes des consommables utilisées pendant l'expérience : 
+
+\begin{table}[h]
+\caption{Informations sur les consommables utilisées}
+\begin{pycode}
+
+from tabulate import tabulate
+
+conso_infos = [conso_infos[0]] + list(sorted(conso_infos[1:], key=lambda row:row[0]))
+table = r"\resizebox{\textwidth}{!}{" + tabulate(conso_infos, headers="firstrow", tablefmt="latex_raw", stralign="left") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}
