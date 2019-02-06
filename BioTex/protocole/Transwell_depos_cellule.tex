@@ -1,0 +1,30 @@
+\subsection{Déposer les cellules dans les inserts}
+
+\begin{enumerate}
+\item Aspirer le collagen-IV de chaque puits
+\item Déposer 100 $\mu L$ de suspension de cellule à $1,32 \times 10^6 cellule/mL$ selon le plan (voir \ref{table-ensemencement})(Ce qui donne $4 \times 10^5 cellule/cm^2$)
+
+\begin{table}[h]
+\caption{Schéma de l'ensemencement des inserts d'une plaque 24 puits}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(6,4)
+value = {
+	"1[A-D]" : "Filtre",
+	"2[A-D]" : "bEnd3",
+	"3-4[A-D]" : "BMEC-P0",
+	"5-6[A-D]" : "BMEC-P1",
+	
+}
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}
+\item Ajouter 600 $\mu L$ de milieu dans le bas de chaque insert
+\item Mettre les cellules à incuber à $37^\circ C$ +$5\%$ $CO_2$ pour 24 h
+
+\end{enumerate}

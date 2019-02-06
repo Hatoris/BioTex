@@ -1,0 +1,40 @@
+\subsection{Récolter les cellules et les compter}
+
+\begin{enumerate}
+\item Aspirer le milieu des cellules
+\item Ajouter 1 $mL$ de PBS
+\item Aspirer le milieu de PBS
+\item Ajouter 1 mL de trypsine par puits
+\item Prélever les cellules dans un falcon de 50 mL
+\item Centrifuger 5 min à 800 g
+\item Aspirer le surnageant 
+\item Suspendre les cellules dans 1 mL de milieu DMEM
+\item Compter les cellules
+\item Diluer les cellules pour obtenir une concentration de  $1,32 \times 10^6 \, cellule/mL$
+\end{enumerate}
+
+\begin{table}[h]
+\caption{Informations sur les cellules utilisées}
+\begin{pycode}
+
+from tabulate import tabulate
+infos = [
+    ["Nom des cellules", "Concentrations (cellule/mL)", "Volume initial (mL)", "Concentrations final (cellule/mL)", "Volume final (mL)"],
+    ["BMEC-P1", "5.11$\times 10^6$", "$1$", "1.32$\times 10^6$", "3.871"],
+    ["bEnd3", "2.59$\times 10^6$", "1", "1.32$\times 10^6$", "1.960"],
+    ["BMEC-P0", "$*^1$", "$*^1$", "$*^1$", "$*^1$"],
+]
+table = r"\resizebox{\textwidth}{!}{" + tabulate(infos, headers="firstrow", tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}
+
+Dilution réalisée pour les BMEC-P0$*^1$ : 
+
+\begin{enumerate}
+\item La concentration de capillaires déposée par puits dans une plaque 6 puits est de 1 cerveau / 1.5$cm^2$
+\item Un puits de transwell a une surface de 0.33$cm^2$, il faut donc mettre 0.22 cerveau
+\item A la fin de l'isolation on à 1 mL contenant 40 cerveaux soit \py{round(1000 / 40, 2)} $\mu L/cerveau$
+\item On dépose donc \py{round(1000 / 40 * 0.22, 2) $\mu L$ par puits de transwell 24 puits
+\end{enumerate}

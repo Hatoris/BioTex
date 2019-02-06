@@ -1,0 +1,31 @@
+\subsection{Préparations du milieu pour l'inflammation des cellules}
+
+\begin{enumerate}
+\item Mesurer la TEER de tout les puits (voir \ref{TEER})
+\item Aspirer le milieu de tout les puits et remplacer par 100 $\mu L$ de milieu DMEM ou DMEM+LPS (voir \ref{milieu-inflammation})selon le schéma \ref{table-inflammation}
+
+\begin{table}[h]
+\caption{Schéma de l'inflammation des cellules}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(6,4)
+value = {
+	"1[A-D]" : "Filtre",
+	"2[A-D]" : "bEnd3",
+	"3[A-D]" : "BMEC-P0-NT",
+	"4[A-D]" : "BMEC-P0-INF",
+	"5[A-D]" : "BMEC-P1-NT",
+	"6[A-D]" : "BMEC-P1-INF",
+	
+}
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-inflammation}
+\end{table}
+\item Dans les puits du bas on ajoute 600 $\mu L$ de milieu BMEC seulement
+\item On mesure ensuite la TEER toute les 2h jusqu'à 24h après le début du traitement
+\end{enumerate}

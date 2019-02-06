@@ -1,0 +1,27 @@
+\subsection{Préparation des transwells}
+
+Chaque puits sera préalablement revêtis avec du collagen-IV à une concentration final de 5~$\mu g/cm^2$. La solution stock de collagen-IV est de  1~$mg/mL$. Chaque puits à une surface de 0,33~$cm^2$. Il nous faut donc \py{Q_coll_par_puit}~$\mu g$ de collagen-IV par puits.
+
+
+Nous allons préparer une solution de collagen-IV à \py{Cf* 1000}~$\mu g/mL$. Sachant que nous avons \py{nb_puits} puits il nous faut donc \py{Vf} $mL$ de la solution de collagen. Préparer la solution de collagen-IV selon le tableau \ref{table-collagen}. Nous déposerons ensuite \py{vol_par_puit * 1000}~$\mu L$ par puits.
+
+
+\begin{table}[H]
+\caption{Dilution de la collagen-IV}
+\resizebox{\textwidth}{!}{\begin{tabular}{cccc}
+\hline
+   Concentration final collagen-IV ($\mu g/mL$) &   Volume initial ($\mu L$) &   Volume PBS ($\mu L$) &   volume final ($\mu L$) \\
+\hline
+ \py{Cf * 1000} &                     \py{Vi}  &                  \py{Vf-Vi} &                       \py{Vf} \\
+\hline
+\end{tabular}}
+\label{table-collagen}
+\end{table}
+
+Chaque plaque sera préalablement incubées avec la collagen-IV : 
+
+\begin{itemize}
+\item Début de l'incubation : \py{start_incubation}
+\item Fin de l'incubation : \py{end_incubation}
+\item TOTAL : \py{TOTAL_incubation}
+\end{itemize}

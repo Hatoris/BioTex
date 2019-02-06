@@ -1,0 +1,94 @@
+\subsection{Test de perméabilité avec le marqueur Dextran-FITC 4 kDa}
+
+\subsubsection{Avant le début du test}
+
+\begin{enumerate}
+\item Sortir 4 plaque receveur 24 puits 
+\item Prendre 2 plaques noir pour la lecture de la fluorescence
+\item Dans chaque plaque ajouter 90 $\mu L$ de milieu BMEC dans les puits de 1-10[A-D], c'est puits sont les puits qui recevront les prélèvement des milieu donneur qui sont concentrés
+\item Dans chaque plaque ajouter les points de la courbe de calibration, on dépose 100 $\mu L$ de chaque concentration dans les puits 11[A-H], 12A
+\item Dans chaque plaque ajouter le milieu BMEC seul comme blanc dans les puits 12[B-E]
+\item Dans chaque plaque ajouter le milieu contenant 1 mg/mL de Dextran-FITC qui sera déposé sur les cellules dans les puits 12[F-H]  
+\end{enumerate}
+
+\subsubsection{Initialisation du test}
+\begin{enumerate}
+\item 24 h après l'inflammation des cellules, on mesure la TEER (voir \ref{TEER})
+\item On prépare le bas d'une plaque 24 puits en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-1}
+\item On aspire le milieu dans tout les inserts (on commence par les puits contenant que du milieu sans LPS)
+\item On déplace les inserts dans la plaque contenant le milieu BMEC frais (étape \ref{milieu-frais-1})
+\item On ajoute ensuite dans chaque puits 100 $\mu L$ de BMEC contenant 1 mg/mL de Dextran-FITC 4 kDa
+\item On incube la plaque à $37^\circ C$ +5\% $CO_2$
+\item On lance le chronométre
+\item On prépare le bas d'une plaque 24 puits  en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-2}
+\subsubsection{Premier prélèvement à \textbf{15 min}}
+\item On prélève 10 $\mu L$ de chaque puits donneur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-15-30}
+\item On déplace l'insert prélevé dans la plaque contenant du milieu frais \ref{milieu-frais-2}
+\item Une fois tout les inserts prélevé on remets la plaque à incuber
+\item On prélève 100 $\mu L$ de tout les puits receveur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-15-30}
+\item On prépare le bas d'une plaque 24 puits  en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-3}
+\subsubsection{Premier prélèvement à \textbf{30 min}}
+\item On prélève 10 $\mu L$ de chaque puits donneur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-15-30}
+\item On déplace l'insert prélevé dans la plaque contenant du milieu frais \ref{milieu-frais-3}
+\item Une fois tout les inserts prélevé on remets la plaque à incuber
+\item On prélève 100 $\mu L$ de tout les puits receveur que l'on dépose dans la plaque en suivant le schéma\ref{table-prelevement-15-30}
+\item On prépare le bas d'une plaque 24 puits  en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-4}
+\subsubsection{Premier prélèvement à \textbf{45 min}}
+\item On prélève 10 $\mu L$ de chaque puits donneur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-45-60}
+\item On déplace l'insert prélevé dans la plaque contenant du milieu frais \ref{milieu-frais-4}
+\item Une fois tout les inserts prélevé on remets la plaque à incuber
+\item On prélève 100 $\mu L$ de tout les puits receveur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-45-60}
+\item On prépare le bas d'une plaque 24 puits  en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-5}
+\subsubsection{Premier prélèvement à \textbf{60 min}}
+\item On prélève 10 $\mu L$ de chaque puits donneur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-45-60}
+\item On déplace l'insert prélevé dans la plaque contenant du milieu frais \ref{milieu-frais-5}
+\item Une fois tout les inserts prélevé on remets la plaque à incuber
+\item On prélève 100 $\mu L$ de tout les puits receveur que l'on dépose dans la plaque en suivant le schéma \ref{table-prelevement-45-60}
+
+\begin{table}[h]
+\caption{Schéma des prélèvement dans la plaque 96 puits pour les temps 15 et 30 min}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(12,8)
+value = {
+    "1-5[A-D]" : ["Filtre-D-15", "P0-NT-D-15", "P0-INF-D-15", "P1-NT-D-15", "P1-INF-D-15"],
+    "1-5[E-H]" : ["Filtre-R-15", "P0-NT-R-15", "P0-INF-R-15", "P1-NT-R-15", "P1-INF-R-15"],
+    "6-10[A-D]" : ["Filtre-D-30", "P0-NT-D-30", "P0-INF-D-30", "P1-NT-D-30", "P1-INF-D-30"],
+    "6-10[E-H]" : ["Filtre-R-30", "P0-NT-R-30", "P0-INF-R-30", "P1-NT-R-30", "P1-INF-R-30"],
+    "11[A-H]" : ["1250", "750", "250", "125", "75", "25", "12.5", "7.5"],
+    "12[A-H]" : ["2.5", "BMEC", "BMEC", "BMEC", "BMEC", "DFITC", "DFITC", "DFITC"]
+    
+}
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-prelevement-15-30}
+\end{table}
+
+\begin{table}[h]
+\caption{Schéma des prélèvement dans la plaque 96 puits pour les temps 45 et 60 min}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(12,8)
+value = {
+    "1-5[A-D]" : ["Filtre-D-45", "P0-NT-D-45", "P0-INF-D-45", "P1-NT-D-45", "P1-INF-D-45"],
+    "1-5[E-H]" : ["Filtre-R-45", "P0-NT-R-45", "P0-INF-R-45", "P1-NT-R-45", "P1-INF-R-45"],
+    "6-10[A-D]" : ["Filtre-D-60", "P0-NT-D-60", "P0-INF-D-60", "P1-NT-D-60", "P1-INF-D-60"],
+    "6-10[E-H]" : ["Filtre-R-60", "P0-NT-R-60", "P0-INF-R-60", "P1-NT-R-60", "P1-INF-R-60"],
+    "11[A-H]" : ["1250", "750", "250", "125", "75", "25", "12.5", "7.5"],
+    "12[A-H]" : ["2.5", "BMEC", "BMEC", "BMEC", "BMEC", "DFITC", "DFITC", "DFITC"]
+    
+}
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-prelevement-45-60}
+\end{table}
+
+\end{enumerate}

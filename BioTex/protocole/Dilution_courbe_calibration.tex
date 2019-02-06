@@ -1,0 +1,33 @@
+\subsection{Préparation de la courbe de calibration}
+
+\begin{enumerate}
+\item Prendre la solution stock concentré à 2 mg/mL
+\item Réaliser les dilutions en suivant le tableau \ref{Courbe-calibration}
+\item Dans des Eppendorf anotté mettre le bon volume de diluant
+\item Réalisé les dilutions en cascades en commencant toujours par la concentration la plus petite
+\begin{table}[H]
+\caption{Dilution pour réalisé la courbe de calibration du Dextran-FITC}
+\label{Courbe-calibration}
+\begin{pycode}
+
+from tabulate import tabulate
+infos = [
+    ["Concentration initial ($\mu g/mL$)", "Volume initial ($\mu L$)", "Concentration final ($\mu g/mL$)", "Volume diluant ($\mu L$)",  "Volume Total ($\mu L$)"],
+    [2000, 625, 1250, 375, 1000],
+    [2000, 375, 750, 625, 1000 ],
+    [2000, 125, 250, 875 , 1000],
+    [1250, 100, 125, 900, 1000 ],
+    [750, 100, 75, 900, 1000],
+    [250, 100, 25, 900, 1000 ],
+    [125, 100, 12.5, 900, 1000 ],
+    [75, 100, 7.5, 900, 1000],
+    [25, 100, 2.5, 900, 1000 ]
+]
+table = r"\resizebox{\textwidth}{!}{" + tabulate(infos, headers="firstrow", tablefmt="latex_raw") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}
+
+\item Entouré d'aluminium les eppendorf et les mettre au frigo
+\end{enumerate}

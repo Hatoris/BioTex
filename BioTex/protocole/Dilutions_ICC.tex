@@ -1,0 +1,89 @@
+\begin{pycode}
+Vwell = 30 # uL
+nb_puits = 6 # plate
+nb_plate = 1
+nb_conditions = 2
+perte = 1.1 # add 10 \% to the final volume
+
+\end{pycode}
+
+\subsection{Préparation des dilutions d'anticorps}
+
+\subsubsection{Préparation PBS 5\% BSA}
+
+\begin{enumerate}
+\item Prendre un falcon de 50 mL
+\item Mettre environ 2.5 g de BSA dedans
+\item Ajouter du PBS préalablement réchauffé à 37$^\circ$C
+\item Agiter jusqu'à dissolution compléte de la BSA
+\item Filtrer la solution avec un filtre à 0.2 $\mu m$
+\item Conserver à +4$^\circ$C
+\end{enumerate}
+
+\subsection{Dilution des anticorps primaires}
+\label{dilution-abs-primaire}
+
+Nous utilisons des ibidi slide 6-puits qui contiennent \py{Vwell} $\mu L$ par puits, nous avons deux puits pour chaque anticorps (Traitées, non-traitées). Il nous faut donc un volume final de \py{Vwell * nb_conditions * perte} $\mu L$ de chaque anticorps primaires (en ajoutant 10 \% de volume supplémentaires pour les pertes).
+
+\begin{enumerate}
+\item Prendre des eppendorf est les annotés
+\item Réaliser les dilutions selon le tableau suivant
+
+\begin{table}[h!]
+\caption{Dilutions des anticorps primaires}
+\begin{pycode}
+
+Vf = Vwell * nb_conditions * perte #uL
+
+from tabulate import tabulate
+infos = [
+    ["Nom", "Concentration initial (mg/mL)", r"Volume initial ($\mu L$)", r"Concentration final ($\mu g    /L$)", r"Volume final ($\mu L$)"],
+    ["Rbt-Cldn5", 0.25, " ", 5, Vf],
+    ["Rbt-ZO-1", 0.25, " ", 2.5, Vf],
+    ["Occludin-A594", 0.5, "" , 5, Vf],
+
+]
+def add_vi(List):
+    data = List[1:]
+    for abs in data:
+        Ci = abs[1]
+        Cf = abs[3]
+        Vf = abs[4]
+        abs[2] = Cf * Vf / (Ci * 1000)
+    return [List[0]] + data
+
+
+
+table = r"\resizebox{\textwidth}{!}{" + tabulate(add_vi(infos), headers="firstrow", tablefmt="latex_raw", stralign="left", numalign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-dilution-abs-primaire}
+\end{table}
+\end{enumerate}
+
+\subsection{Dilution de l'anticorps secondaire}
+\label{dilution-abs-primaire}
+Nous avons deux anticorps primaires non marquées et nous marquons deux puits avec le même anticorps, il nous faut donc \py{Vwell * nb_conditions * 2 * perte} $\mu L$ d'anticorps secondaire (en ajoutant 10 \% de volume supplémentaires pour les pertes). 
+
+\begin{enumerate}
+\item Prendre des eppendorf est les annotés
+\item Réaliser les dilutions selon le tableau suivant
+
+\begin{table}[h!]
+\caption{Dilutions de l'anticorps secondaire}
+\begin{pycode}
+
+Vf_second = Vwell * nb_conditions * 2 * perte
+
+infos = [
+    ["Nom", "Concentration initial (mg/mL)", r"Volume initial ($\mu L$)", r"Concentration final ($\mu g    /L$)", r"Volume final ($\mu L$)"],
+    ["Goat-antiRbt-A488", 2, " ", 7, Vf_second],
+]
+
+table = r"\resizebox{\textwidth}{!}{" + tabulate(add_vi(infos), headers="firstrow", tablefmt="latex_raw", stralign="left", numalign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-dilution-abs-secondaire}
+\end{table}
+\end{enumerate}
+
