@@ -1,0 +1,27 @@
+\subsection{Transwells setup}
+
+Each well will be coated with collagen-IV with a final concentration of 5~$\mu g/cm^2$. The collagen-IV stock solution concentration is 1~$mg/mL$. Each well have a surface of 0,33~$cm^2$. We need \py{Q_coll_par_puit}~$\mu g$ of collagen-IV by well.
+
+
+We will prepare a collagen-IV solution at \py{Cf* 1000}~$\mu g/mL$. We have \py{nb_puits} wells so we need \py{Vf} $mL$ of collagen-IV solution. We prepare the collagen-IV solution following the table \ref{table-collagen}. Then, we will add \py{vol_par_puit * 1000}~$\mu L$ of the fresh prepare solution to each well.
+
+
+\begin{table}[H]
+\caption{Collagen-IV dilution}
+\resizebox{\textwidth}{!}{\begin{tabular}{cccc}
+\hline
+   Collagen-IV final concentration ($\mu g/mL$) &   Initial volume ($\mu L$) &   PBS volume ($\mu L$) &   Final volume ($\mu L$) \\
+\hline
+ \py{Cf * 1000} &                     \py{Vi}  &                  \py{Vf-Vi} &                       \py{Vf} \\
+\hline
+\end{tabular}}
+\label{table-collagen}
+\end{table}
+
+Each plate will be coating and incubated with collagen-IV :
+
+\begin{itemize}
+\item Incubation starting date and time : \py{start_incubation}
+\item Incubation ending date and time : \py{end_incubation}
+\item TOTAL : \py{TOTAL_incubation}
+\end{itemize}

@@ -1,0 +1,14 @@
+\newcommand{\TABLE}[3]{
+% 1 : captation
+% 2 : plate values
+% 3 : label
+\begin{table}[H]
+\caption{#1}
+\begin{pycode}
+print(r"\resizebox{\textwidth}{!}{")
+print(#2)
+print("}")
+\end{pycode}
+\label{#3}
+\end{table}
+}

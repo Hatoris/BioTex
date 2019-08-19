@@ -1,3 +1,16 @@
+\begin{pycode}
+
+from pythontex_command.cells_count import CellsCounter
+
+#should be declare in the main protocol 
+_counter = CellsCounter(CELL_CONCENTRATION_PER_SURFACE,
+                       DEPOSIT_VOLUME_PER_WELL,
+                       SURFACE )
+
+\end{pycode}
+
+
+
 \subsection{Récolter les cellules et les compter}
 
 \begin{enumerate}
@@ -10,8 +23,8 @@
 \item Aspirer le surnageant 
 \item Suspendre les cellules dans 1 mL de milieu DMEM
 \item Compter les cellules
-\item Diluer les cellules pour obtenir une concentration de \py{rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"}
-\item On dépose ensuite \py{Vol_depos}~$\mu L$ par puits devant contenir des cellules
+\item Diluer les cellules pour obtenir une concentration de \py{_counter.to_latex_scientific_notation(_counter.final_concentration)}
+\item On dépose ensuite \py{_counter.deposit_volume_per_well}~$\mu L$ par puits devant contenir des cellules
 \end{enumerate}
 
 \begin{table}[h]
@@ -24,16 +37,15 @@ infos = [
     ["Nom des cellules", "Concentrations (cellule/mL)", "Volume initial (mL)", "Concentrations final (cellule/mL)", "Volume final (mL)"]]
     
 if "rows" in locals():
-    #for row in rows:
-        #infos.append(row)
-    infos = infos + rows
+    for row in rows:
+        infos.append(row)
 else:   
     infos = [
     ["Nom des cellules", "Concentrations (cellule/mL)", "Volume initial (mL)", "Concentrations final (cellule/mL)", "Volume final (mL)"],
-    ["BMEC", rf"{to_latex(Ci)[0]}$\times 10^{to_latex(Ci)[1]}$", "$1$", rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}$", Vf],
+    _counter.get_row(CELL_NAME, CELL_INITIAL_CONCENTRATION, CELL_INITAL_VOLUME),
 ]
 
-table = r"\resizebox{\textwidth}{!}{" + tabulate(infos, headers="firstrow", tablefmt="latex_raw", stralign="center") + "}"
+table = r"\resizebox{\textwidth}{!}{" + tabulate(infos, headers="firstrow", tablefmt="latex_raw", stralign="center", numalign="center") + "}"
 print(table)
 \end{pycode}
 \label{table-comptage-cellules}

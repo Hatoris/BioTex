@@ -1,0 +1,101 @@
+\subsection{Permeability assay with the \py{Dex_Mw} kDa Dextran-FITC marker}
+
+\subsubsection{Before starting the test}
+
+This step are explain for one 24 well plates, you may multiply this instruction for each transwell plate you have.
+
+\begin{enumerate}
+\item Take 4 24 well plates with no insert in it
+\item Write on the plate 15, 30, 45, and 60 min
+\item Add 600 $\mu L$ of medium in each wells
+\item Put the 4 plates in the incubator 
+\item Take 2 96 black well plates for fluorescence reading
+\item Add a sticker on each 96 well plates then write 15-30 and 45-60 on them 
+\item In each 96 well plates add medium in the wells 1-10[A-D], those wells are use to collect donnor well from the 24 well plates
+\item Then in each 96 well plates add calibration curve dilution, put 100 $\mu L$ of each concentration in well 11[A-H] and 12A
+\item In each 96 well plates add medium alone as blanck value in wells 12[B-E]
+\item Finaly add working solution of \py{Dex_Mw} kDa Dextran-FITC in wells 12[F-H] 
+\end{enumerate}
+
+\subsubsection{Starting the permeability test}
+\begin{enumerate}
+\item Mesure the TEER (see \ref{TEER})
+\item Take the 15 min 24 wells plate (after at least 15 min of incubation)
+\item Take the 24 wells plate with inserts (cells) on it
+\item Move each inserts in the 15 min 24 wells plates
+\item Carefully aspirate the medium in each inserts
+\item Add 100 $\mu L$ of 1 $mg/mL$ \py{Dex_Mw} kDa Dextran-FITC in each inserts
+\item Start the stopwatch  
+\item Inubate the plate at $37^\circ C$ +5\% $CO_2$
+\subsubsection{First sample at \textbf{15 min}}
+\item Take from the incubator the 24 wells plates with cells and the 30 min 24 wells plate
+\item We sample 10 $\mu L$ of each donor well and we drop it in the 15-30 96 wells plates following the schema \ref{table-prelevement-15-30}
+\item When all inserts are sampled, move all the insert in the 30 min 24 wells plate
+\item Put back in the incubator the 30 min 24 wells plate
+\item Sample 100 $\mu L$ of all receiver well and put it in the 15-30 96 wells plate following the schema \ref{table-prelevement-15-30}
+\subsubsection{Second sample at \textbf{30 min}}
+\item Take from the incubator the 24 wells plates with cells and the 45 min 24 wells plate
+\item We sample 10 $\mu L$ of each donor well and we drop it in the 15-30 96 wells plates following the schema \ref{table-prelevement-15-30}
+\item When all inserts are sampled, move all the insert in the 45 min 24 wells plate
+\item Put back in the incubator the 45 min 24 wells plate
+\item Sample 100 $\mu L$ of all receiver well and put it in the 15-30 96 wells plate following the schema \ref{table-prelevement-15-30}
+\subsubsection{Third sample at \textbf{45 min}}
+\item Take from the incubator the 24 wells plates with cells and the 60 min 24 wells plate
+\item We sample 10 $\mu L$ of each donor well and we drop it in the 45-60 96 wells plates following the schema \ref{table-prelevement-45-60}
+\item When all inserts are sampled, move all the insert in the 60 min 24 wells plate
+\item Put back in the incubator the 45 min 24 wells plate
+\item Sample 100 $\mu L$ of all receiver well and put it in the 45-60 96 wells plate following the schema \ref{table-prelevement-45-60}
+\subsubsection{Fourth sample at \textbf{60 min}}
+\item Take from the incubator the 24 wells plates with cells
+\item We sample 10 $\mu L$ of each donor well and we drop it in the 45-60 96 wells plates following the schema \ref{table-prelevement-45-60}
+\item Sample 100 $\mu L$ of all receiver well and put it in the 45-60 96 wells plate following the schema \ref{table-prelevement-45-60}
+
+\begin{table}[h]
+\caption{Sample schema for the 96 well plates at 15-30 min}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(12,8)
+value = (
+    ("1-5[A-H]", ["100", "200", "300", "400", "Filter"]),
+    ("6-10[A-H]", ["100", "200", "300", "400", "Filter"]),
+    ("A-D[1-10]", "-D"),
+    ("E-H[1-10]", "-R"),
+    ("1-5[A-H]", "-15"),
+    ("6-10[A-H]", "-30"),
+    ("11[A-H]", ["1250", "750", "250", "125", "75", "25", "12.5", "7.5"]),
+    ("12[A-H]", ["2.5", "BMEC", "BMEC", "BMEC", "BMEC", "DFITC", "DFITC", "DFITC"]),
+)
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-prelevement-15-30}
+\end{table}
+
+\begin{table}[h]
+\caption{Sample schema for the 96 well plates at 45-60 min}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(12,8)
+value = (
+    ("1-5[A-H]", ["100", "200", "300", "400", "Filter"]),
+    ("6-10[A-H]", ["100", "200", "300", "400", "Filter"]),
+    ("A-D[1-10]", "-D"),
+    ("E-H[1-10]", "-R"),
+    ("1-5[A-H]", "-45"),
+    ("6-10[A-H]", "-60"),
+    ("11[A-H]", ["1250", "750", "250", "125", "75", "25", "12.5", "7.5"]),
+    ("12[A-H]", ["2.5", "BMEC", "BMEC", "BMEC", "BMEC", "DFITC", "DFITC", "DFITC"]),
+)
+plate.set(value, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-prelevement-45-60}
+\end{table}
+
+\end{enumerate}

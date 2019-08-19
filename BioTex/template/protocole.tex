@@ -51,7 +51,7 @@ cells_infos = [
 ]
 \end{pycode}
 
-\input{\PATH{material}{Cellules}}
+%\input{\PATH{material}{Cellules}}
 
 \begin{pycode}
 conso_infos = [
@@ -61,7 +61,7 @@ conso_infos = [
 ]
 \end{pycode}
 
-\input{\PATH{material}{Consommables}}
+%\input{\PATH{material}{Consommables}}
 
 \section{Protocoles}
 
@@ -82,19 +82,116 @@ TOTAL_incubation = ""
 
 \end{pycode}
 
-\input{\PATH{protocole}{Transwell_collagen.tex}}
+%\input{\PATH{protocole}{Transwell_collagen.tex}}
+
+\begin{pycode}
+
+nb_puit_cellule = 32
+conc_cell_surf = 4e5 # cellule/cm2 
+Vol_depos  = 100 # uL
+Ci = 5.2e6 # cellule / mL
+Vi = 1 # mL
+
+nb_cell_par_puit = conc_cell_surf * 0.33 # nb cellule pour un puit
+cell_total = nb_cell_par_puit * nb_puit_cellule
+Cf = nb_cell_par_puit / (Vol_depos / 1000) # cellule / mL
+Vf = round(Ci * Vi / Cf, 2) # mL
+
+def to_latex(value):
+    fstr = f"{value:.2E}"
+    val, power = fstr[:4], fstr[-1]
+    return val, int(power)
+
+\end{pycode}
 
 %\input{\PATH{protocole}{Comptage_cellules.tex}}
+
+\begin{pycode}
+plate_scheme = [
+	("A[1-6]", "Filtre"),
+	("B[1-6]", "NT"),
+	("C[1-6]", "LPS"),
+	("D[1-6]", r"\IL"),
+	("A-D[1-6]", "-Vera")
+]
+\end{pycode}
 
 %\input{\PATH{protocole}{Transwell_depos_cellule.tex}}
 
 %\input{\PATH{protocole}{Mesure_TEER.tex}}
 
-%\input{\PATH{protocole}{Milieu_inflamation.tex}}
+\begin{pycode}
+
+nb_de_puits_par_condition = 12 #
+vol_puit = Vol_depos # uL
+
+# LPS
+LPS = True 
+Cf_lps = 10 # ug/mL
+Ci_lps = 1000 # ug/mL
+Vf_lps = round(nb_de_puits_par_condition * vol_puit * 1.10, 1) # uL + 10 % pour pertes
+Vi_lps = round(Cf_lps * Vf_lps / Ci_lps) # uL
+Venleve_lps = round(Vf_lps - Vi_lps)
+
+# TNF
+TNF =False
+Cf_tnf = 0.003 # ug/mL
+Ci_tnf = 1 # ug/mL
+Vf_tnf = round(nb_de_puits_par_condition * vol_puit * 1.10, 1) # uL + 10 % pour pertes
+Vi_tnf = round(Cf_tnf * Vf_tnf / Ci_tnf, 4) # uL
+Venleve_tnf = round(Vf_tnf - Vi_tnf, 4)
+
+#IL1
+IL1 = True
+Cf_il1 = 0.050 # ug/mL
+Ci_il1 = 1 # ug/mL
+Vf_il1 = round(nb_de_puits_par_condition * vol_puit * 1.10, 1) # uL + 10 % pour pertes
+Vi_il1 = round(Cf_il1 * Vf_il1 / Ci_il1, 4) # uL
+Venleve_il1 = round(Vf_il1 - Vi_il1, 4)
+
+\end{pycode}
+
+%\input{\PATH{protocole}{Milieu_inflammation.tex}}
+
+\begin{pycode}
+start_time_inflammation = "12h50"
+start_day_inflammation = 6
+
+p1 = [
+	("A[1-6]", "Filtre"),
+	("B[1-6]", "NT"),
+	("C[1-6]", "LPS"),
+	("D[1-6]", r"\IL"),
+	("A-D[1-6]", "-Vera")
+]
+p2 = [
+	("A[1-6]", "Filtre"),
+	("B[1-6]", "NT"),
+	("C[1-6]", "LPS"),
+	("D[1-6]", r"\IL"),
+	("A-D[1-6]", "-Teno")
+]
+
+plates = [("Schéma de l'inflammation des cellules pour le Vérapamil", p1, "table-inflammation-verapamil"), ("Schéma de l'inflammation des cellules pour le tenoxicam", p2, "table-inflammation-tenoxicam")]
+
+\end{pycode}
 
 %\input{\PATH{protocole}{Inflammation_cellule.tex}}
 
-%\input{\PATH{protocole}{Solution_stock_poudre.tex}}
+\begin{pycode}
+
+Dex_Mw = 4
+final_concentration_DexFITC = 1 #mg/mL
+final_concentration_units_DexFITC = "mg/mL"
+masse_weighted_DexFITC = 10.3 
+masse_weighted_DexFITC_units = "mg"
+final_volume_DexFITC = masse_weighted_DexFITC / final_concentration_DexFITC
+final_volume_DexFITC_units = "mL"
+
+
+\end{pycode}
+
+%\input{\PATH{protocole}{Solution_stock_DexFITC.tex}}
 
 %\input{\PATH{protocole}{Dilution_courbe_calibration.tex}}
 

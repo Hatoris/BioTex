@@ -1,0 +1,23 @@
+\subsection{Add cells on inserts}
+
+\begin{enumerate}
+\item Aspirate the collagen-IV in each well
+\item Add \py{Vol_depos} $\mu L$ of cells suspension at \py{rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"} following the schema (see \ref{table-ensemencement}) \\ (That give us \py{rf"{to_latex(conc_cell_surf)[0]}$\times 10^{to_latex(conc_cell_surf)[1]}\, cellule/cm^2$"}).
+
+\begin{table}[h]
+\caption{Schema to seed 24 wells plate}
+\begin{pycode}
+
+from BioPlate import BioPlate
+plate = BioPlate(6,4)
+plate.set(plate_scheme, merge=True)
+
+table = r"\resizebox{\textwidth}{!}{" + plate.table(tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-ensemencement}
+\end{table}
+\item Add 600 $\mu L$ of media in the bottom chamber of each well
+\item Put the cells in incubator at $37^\circ C$ +$5\%$ $CO_2$
+
+\end{enumerate}

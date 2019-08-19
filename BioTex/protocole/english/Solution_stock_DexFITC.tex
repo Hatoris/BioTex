@@ -1,0 +1,26 @@
+\subsection{ Preparation of \py{Dex_Mw} kDa Dextran-FITC stock solution}
+
+\begin{enumerate}
+\item The final concentration should be \py{final_concentration_DexFITC} \py{final_concentration_units_DexFITC}
+\item We have weighted \py{masse_weighted_DexFITC} \py{masse_weighted_DexFITC_units} 
+\item We add \py{final_volume_DexFITC} \py{final_volume_DexFITC_units} of medium
+\item Wrap the 15 mL falcon tube with aluminum foil
+\end{enumerate}
+
+\subsection{Working solution preparation}
+
+\begin{pycode}
+
+Final_volume_ = int(nb_puits * volume_per_well)
+Final_volume_lost = int(Final_volume_ * 1.1)
+Vi_ = int(working_concentration * Final_volume_lost / final_concentration_DexFITC)
+delta_Volume = int(Final_volume_lost - Vi_)    
+\end{pycode}
+
+We have \py{nb_puits} wells to test, in each we will add \py{volume_per_well} $\mu L$ per well. We need \py{Final_volume_} $\mu L$. We will prepare \py{Final_volume_lost} $\mu L$ of solution at \py{working_concentration} \py{working_concentration_units} of \py{Dex_Mw} kDa Dextran-FITC in medium. 
+
+\begin{enumerate}
+\item We take \py{delta_Volume} $\mu L$ of medium
+\item Then we add \py{Vi_} $\mu L$ of the \py{Dex_Mw} kDa Dextran-FITC at \py{final_concentration_DexFITC} \py{final_concentration_units_DexFITC}
+\item Protect the falcon from light abd keep it in fridge
+\end{enumerate}

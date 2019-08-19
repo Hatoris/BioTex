@@ -1,8 +1,19 @@
+\begin{pycode}
+
+if "counter" in locals():
+    counter = counter
+else:
+    counter = _counter
+
+
+\end{pycode}
+
+
 \subsection{Déposer les cellules dans les inserts}
 
 \begin{enumerate}
 \item Aspirer le collagen-IV de chaque puits
-\item Déposer \py{Vol_depos} $\mu L$ de suspension de cellule à \py{rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"} selon le plan (voir \ref{table-ensemencement}) \\ (Ce qui donne \py{rf"{to_latex(conc_cell_surf)[0]}$\times 10^{to_latex(conc_cell_surf)[1]}\, cellule/cm^2$"})
+\item Déposer \py{counter.deposit_volume_per_well} $\mu L$ de suspension de cellule à \py{counter.to_latex_scientific_notation(counter.final_concentration)} cellules/mL selon le plan (voir \ref{table-ensemencement}) \\ (Ce qui donne \py{counter.to_latex_scientific_notation(counter.cell_concentration_per_surface)} cellule/$cm^2$)
 
 \begin{table}[h]
 \caption{Schéma de l'ensemencement des inserts d'une plaque 24 puits}

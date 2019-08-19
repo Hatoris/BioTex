@@ -1,0 +1,39 @@
+\subsection{Harvest and count cells}
+
+\begin{enumerate}
+\item Aspirate cells medium 
+\item Add 10 $mL$ of PBS 
+\item Aspirate the PBS
+\item Add 10-12 $mL$ of trypsine 0.25 \% by flask
+\item Get the cells in 50 mL falcon tube
+\item Centrifuge 5 min at 800$g$
+\item Aspirate the supernatant 
+\item Suspends cells in 1 $mL$ of medium 
+\item Count the cells
+\item Dilute the cells to reach a final concentration of \py{rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"}
+\item Add \py{Vol_depos}~$\mu L$ by well that should have cells on it
+\end{enumerate}
+
+\begin{table}[h]
+\caption{Cells dilution}
+\begin{pycode}
+
+from tabulate import tabulate
+
+infos = [
+    ["Cells name", "Concentrations (cell/mL)", "Initial volume (mL)", "Final concentration (cell/mL)", "Final volume (mL)"]]
+    
+if "rows" in locals():
+    for row in rows:
+        infos.append(row)
+else:   
+    infos = [
+    ["Cells name", "Concentrations (cell/mL)", "Initial volume (mL)", "Final concentration (cell/mL)", "Final volume (mL)"],
+    ["BMEC", rf"{to_latex(Ci)[0]}$\times 10^{to_latex(Ci)[1]}$", "$1$", rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}$", Vf],
+]
+
+table = r"\resizebox{\textwidth}{!}{" + tabulate(infos, headers="firstrow", tablefmt="latex_raw", stralign="center") + "}"
+print(table)
+\end{pycode}
+\label{table-comptage-cellules}
+\end{table}

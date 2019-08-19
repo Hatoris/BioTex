@@ -1,0 +1,40 @@
+\begin{pycode}
+label = f"prelevement-{molecule_1}"
+\end{pycode}
+
+\subsection{Test de perméabilité avec le marqueur Dextran-FITC}
+
+\subsubsection{Avant le début du test}
+
+\begin{enumerate}
+\item Sortir \py{NOMBRE_DE_PLAQUE} plaque receveur 24 puits 
+\item Prendre \py{NOMBRE_DE_PLAQUE}  plaques noir pour la lecture de la fluorescence
+\item Dans chaque plaque ajouter 90 $\mu L$ de milieu BMEC dans les puits de 1-6[A-D], c'est puits sont les puits qui recevront les prélèvement des milieu donneur qui sont concentrés
+\item Dans chaque plaque ajouter les points de la courbe de calibration, on dépose 100 $\mu L$ de chaque concentration dans les puits E-G[1-12]
+\item Dans chaque plaque ajouter le milieu BMEC seul comme blanc dans les puits H[4-7]
+\item Dans chaque plaque ajouter le milieu contenant 1 mg/mL de Dextran-FITC qui sera déposé sur les cellules dans les puits H[1-3]  
+\end{enumerate}
+
+\subsubsection{Initialisation du test}
+\begin{enumerate}
+\item On mesure la TEER (voir \ref{TEER})
+\item On prépare le bas d'une plaque 24 puits en ajoutant 600 $\mu L$ de milieu BMEC dans chaque puits \label{milieu-frais-1}
+\item On aspire le milieu dans tout les inserts
+\item On déplace les inserts dans la plaque contenant le milieu BMEC frais (étape \ref{milieu-frais-1})
+\item On ajoute ensuite dans chaque puits 100 $\mu L$ de BMEC contenant 1 mg/mL de \py{molecule_1}
+\item On incube la plaque à $37^\circ C$ +5\% $CO_2$
+\item On lance le chronométre
+\subsubsection{Prélévement aprés \py{DUREE} minutes}
+\item On prélève 10 $\mu L$ de chaque puits donneur que l'on dépose dans la plaque en suivant le schéma \ref{prelevement-4kDa-Dex-FITC}
+\item On prélève 100 $\mu L$ de tout les puits receveur que l'on dépose dans la plaque en suivant le schéma \ref{prelevement-4kDa-Dex-FITC}
+
+
+\begin{pycode}
+from pydoc2tex.latex_tool import create_table
+
+create_table(PLATES, plate_infos = [12,8])
+\end{pycode}
+
+    
+
+\end{enumerate}

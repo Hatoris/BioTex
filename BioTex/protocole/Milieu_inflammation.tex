@@ -1,11 +1,47 @@
-\subsection{Préparations du milieu pour l'inflammation des cellules}
+\begin{pycode}
+
+def cyto(ccf, units, name, test):
+    if test:
+        print(fr"\item {ccf}~{units} de {name}")
+    
+def subsubsection_cyto(name, evalname, ci_div, ci_unit, test):
+    if test:
+        print(r"\subsubsection{" + "Milieu contenant le " + f"{name}" + "}")
+        print(r"\begin{enumerate}")
+        print(fr"\item Prendre la solution de {name} {eval('Ci_' + evalname) / ci_div}~{ci_unit} dans le -$80^\circ C$")
+        print(fr"\item Dans un eppendorf mettre {eval('Vf_' + evalname)} $\mu L$ de milieu BMEC et enlever {eval('Vi_' + evalname)} $\mu L$")
+        print(fr"\item Ajouter {eval('Vi_' + evalname)} $\mu L$ de {name} à {eval('Ci_' + evalname) / ci_div}~{ci_unit} dans le milieu BMEC à 20 \%")
+        print(fr"\item Incuber l'eppendorf à $37^\circ C$ pendant 5 min")
+        print(r"\end{enumerate}")
+    else:
+        return " "
+
+\end{pycode}
+
+
+\subsection{Préparations des milieux pour l'inflammation des cellules}
 \label{milieu-inflammation}
-Les cellules vont être inflammées avec $10 \mu g/mL$ de LPS. On va déposer $100\,\mu L$ d'une solution contenant le LPS dilué dans le milieu de culture (BMEC 20\%).
-Nous ne travaillerons pas avec les bEnd.3, ceci on une TEER trop basse et nous n'avons pas de colonne contrôle. Nous allons inflammer un colonne de BMEC-P0 et une colonne de BMEC-P1 (n=4). Nous avons donc besoins de \py{8 * 100} $\mu L$ de solution de LPS, par sécurité nous allons en préparer 1000 $\mu L$.
+
+Les cellules vont être inflammées (INF) \nomenclature{INF}{Inflammation} avec :
+\begin{pycode}
+print(r'\begin{itemize}')
+cyto(Cf_lps, r"$\mu g/mL$", "LPS", LPS)
+cyto(Cf_tnf * 1000, r"$ng/mL$", r"\TNF", TNF)
+cyto(Cf_il1 * 1000, r"$ng/mL$", r"\IL", IL1)
+print(r'\end{itemize}')
+\end{pycode}
+Nous allons inflammer 1es lignes par conditions BMEC (n $=$\py{nb_de_puits_par_condition}). Nous avons donc besoin de \py{Vf_lps}~$\mu L$ de solution pour chaque condition. Les cellules contrôles, non traitées (NT) \nomenclature{NT}{Non-traité}, seront dans du milieu de culture. 
+
+\begin{pycode}
+subsubsection_cyto("LPS", "lps", 1000, r"$mg/mL$", LPS)
+subsubsection_cyto(r"\IL", "il1", 1, r"$\mu g/mL$", IL1)
+subsubsection_cyto(r"\TNF", "tnf", 1, r"$\mu g/mL$", TNF)
+\end{pycode}
+
+\subsubsection{Milieu pour les cellules non traitées}
 
 \begin{enumerate}
-\item Prendre la solution de LPS 1 mg/mL dans le -$80^\circ C$
-\item Dans un eppendorf mettre 1 mL de milieu BMEC et enlever \py{1000 * 10 / 1000} $\mu L$
-\item Ajouter \py{1000 * 10 / 1000} $\mu L$ de LPS à 1 mg/mL dans le milieu DMEM
-\item Incuber l'eppendorf
+\item Dans un eppendorf mettre \py{2 * Vf_il1} $\mu L$ de milieu BMEC et enlever \py{2 * Venleve_il1} $\mu L$
+\item Ajouter \py{2 * Vi_il1} $\mu L$ de PBS dans le milieu DMEM
+\item Incuber l'eppendorf à $37^\circ C$ pendant 5 min
 \end{enumerate}
