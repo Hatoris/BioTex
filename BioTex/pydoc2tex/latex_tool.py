@@ -1,8 +1,8 @@
 from typing import List, Tuple
 from BioPlate import BioPlate
 
-from pydoc2tex.latex_elements import LatexElements as LE
-from pydoc2tex import ureg
+from .latex_elements import LatexElements as LE
+from . import ureg
 from pythontex_command import Enumerate
 
 
