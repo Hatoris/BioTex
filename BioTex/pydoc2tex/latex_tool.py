@@ -75,7 +75,7 @@ def create_stock_solutions_2(infos : List):
             enum.append(f"Dans une fiole jaugé déposée la masse pesée et completer jusqu'à 10 mL avec du {drug.get('diluant')}")
             enum.append("Fermer la fiole jaugé est la mettre dasns le bain marie à 37$^\\circ$C")
             enum.append("Une fois la solution limpide et qu'il n'y a plus de particules en suspension filtrer la solution à 0.2 nm")
-            enum.append(f"La concentration final de la solution est {round(Cf,2):.3~P}")
+            enum.append(f"La concentration final de la solution est {round(Cf,2):~P}".replace("ug", "$\\mu g$"))
             enum.append("Entourer le tube d'aluminium")
 
 def create_work_solution(infos : List):
@@ -100,12 +100,12 @@ def create_work_solution(infos : List):
     """
     for drug in infos:
         print(LE.subsubsection(f"Préparation de la solution de travail du {drug.get('name', 'NotFound')}"))
-        Ci = (concentration_for_a_given_masse(drug.get("Vf"), drug.get("Mw"), drug.get("weighted"))).to("uM")
-        Vt = (ureg(drug.get("vol_puits")) * drug.get("nb_puits")).to("uL") * 1.10
-        Vi = ureg(drug.get("Ct")) * Vt / Ci
+        Ci = (concentration_for_a_given_masse(drug.get("Vf"), drug.get("Mw"), drug.get("weighted"), concentration_massique = drug.get("concentration_massique", None))).to(drug.get("concentration_massique", "uM"))
+        Vt = round((ureg(drug.get("vol_puits")) * drug.get("nb_puits")).to("uL") * 1.10, 1)
+        Vi = round(ureg(drug.get("Ct")) * Vt / Ci, 1)
         with Enumerate() as enum:
             enum.append(f"Prendre {Vt:~P} de {drug.get('work_diluant')} et le mettre dans un falcon de 50 mL".replace("ul", "$\\mu L$"))
-            enum.append(f"Enlever {Vi:.2~P} de {drug.get('work_diluant')} et ajouter {Vi:.2~P} de la solution stock de {drug.get('name', 'NotFound')} ({Ci.to('mM'):.3~P})".replace("ul", "$\\mu L$"))
+            enum.append(f"Enlever {Vi:~P} de {drug.get('work_diluant')} et ajouter {Vi:~P} de la solution stock de {drug.get('name', 'NotFound')} ({round(Ci.to(drug.get('concentration_massique', 'uM'))):~P})".replace("ul", "$\\mu L$"))
             enum.append(f"Vortexer et protéger de la lumiére")
             enum.append(f"Conserver la solution de {drug.get('name')} ({drug.get('Ct')}) a température piéce, mettre à incuber 30 min avant le test".replace("uM", "$\\mu M$"))
 
