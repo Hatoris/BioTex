@@ -1,3 +1,15 @@
+\begin{pycode}
+
+to_latex = cellDilution.to_latex
+
+if "Vol_depos" in locals():
+    #final_conc = rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"
+    volume_deposed = Vol_depos
+else:
+    final_conc = to_latex(parameters.concentration_final)
+    volume_deposed = parameters.volume_per_well
+\end{pycode}
+
 \subsection{Récolter les cellules et les compter}
 
 \begin{enumerate}
@@ -10,8 +22,9 @@
 \item Aspirer le surnageant 
 \item Suspendre les cellules dans 1 mL de milieu DMEM
 \item Compter les cellules
-\item Diluer les cellules pour obtenir une concentration de \py{rf"{to_latex(Cf)[0]}$\times 10^{to_latex(Cf)[1]}\, cellule/mL$"}
-\item On dépose ensuite \py{Vol_depos}~$\mu L$ par puits devant contenir des cellules
+\item Diluer les cellules pour obtenir une concentration de 
+\py{rf"{final_conc}$\, cellule/mL$"}
+\item On dépose ensuite \py{volume_deposed}~$\mu L$ par puits devant contenir des cellules
 \end{enumerate}
 
 \begin{table}[h]
